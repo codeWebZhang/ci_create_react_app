@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Layout, Menu, Dropdown, Icon } from "antd";
+import { Layout, Menu, Dropdown } from "antd";
 import HorizontalNav from './horizontalNav';
 import styles from './index.module.less';
 

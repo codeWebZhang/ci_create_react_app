@@ -3,7 +3,7 @@ import { config } from "../../config";
 import { Menu } from "antd";
 import _ from "lodash";
 // import { appHistory } from "@utils/stark";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 // import { filterMenu } from "@utils/index";
 import { useLocation, useHistory } from "react-router-dom";
 import classNames from "classnames";
@@ -13,9 +13,9 @@ let { menu } = config;
 
 export default function HorizontalNav(props) {
     const history = useHistory();
-    let jsonc = JSON.parse(
-        JSON.stringify(props.user ? props.user.permissionList : [])
-    );
+    // let jsonc = JSON.parse(
+    //     JSON.stringify(props.user ? props.user.permissionList : [])
+    // );
     // menu = filterMenu(jsonc, menu);
     // let { formatMessage } = props.intl;
 
@@ -81,7 +81,7 @@ export default function HorizontalNav(props) {
                 }
                 items.push(
                     <Menu.Item
-                        // className={cls}
+                        className={cls}
                         key={item.key}
                         onClick={() => {
                             history.push(`/${item.key}`);
