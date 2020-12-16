@@ -21,7 +21,7 @@ jobs:
         BUILD_SCRIPT: yarn && yarn build
 
     - name: deploy file
-        uses: wlixcc/SFTP-Deploy-Action@v1.0
+        uses: webfactory/ssh-agent@v0.4.1
         with:
           username: 'root'
           server: '49.235.106.43'
