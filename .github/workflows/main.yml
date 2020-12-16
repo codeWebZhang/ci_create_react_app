@@ -19,3 +19,15 @@ jobs:
         BRANCH: gh-pages
         FOLDER: build
         BUILD_SCRIPT: yarn && yarn build
+
+    - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@v2.0.8
+        env:
+          # 这个地方的用法会在下面解释，简单的说就是一个变量
+          # 为了安全，被写在一个其他的地方
+          SSH_PRIVATE_KEY: ${{ secrets.TOKEN }}
+          REMOTE_HOST: '49.235.106.43'
+          REMOTE_USER: 'root'
+          SOURCE: './build'
+          TARGET: '/usr/test'
+          ARGS: '-avzr --delete'
