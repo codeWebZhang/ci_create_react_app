@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Form, Input, Checkbox, Button } from "antd";
+import { Form, Input, Button } from "antd";
 import Icon from '@ant-design/icons';
 import axios from "axios";
 import styles from './index.module.less';

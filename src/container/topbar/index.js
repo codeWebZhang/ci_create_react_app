@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Layout, Menu, Dropdown, Modal } from "antd";
+import { Layout, Modal } from "antd";
 import axios from 'axios';
 import HorizontalNav from './horizontalNav';
 import styles from './index.module.less';
@@ -36,25 +36,25 @@ export default function TopBar(props) {
     //     // props.history.push("/login");
     //     window.location.href = "/login";
     // };
-    const menu = (
-        <Menu
-            className={styles.menu_root}
-            theme="dark"
-        // onClick={props.changeLocale}
-        >
-            <Menu.Item key="zh">
-                中文
-        </Menu.Item>
-            <Menu.Item key="en">
-                English
-        </Menu.Item>
-        </Menu>
-    );
+    // const menu = (
+    //     <Menu
+    //         className={styles.menu_root}
+    //         theme="dark"
+    //     // onClick={props.changeLocale}
+    //     >
+    //         <Menu.Item key="zh">
+    //             中文
+    //     </Menu.Item>
+    //         <Menu.Item key="en">
+    //             English
+    //     </Menu.Item>
+    //     </Menu>
+    // );
 
-    let local = "中文";
-    if (props.currLocal === "en") {
-        local = "English";
-    }
+    // let local = "中文";
+    // if (props.currLocal === "en") {
+    //     local = "English";
+    // }
     // const logoUrl = window["config"] && window["config"].tenantLogo && window["config"].tenantLogo.generalLogoPath
     //     ? window["config"].tenantLogo.generalLogoPath : require("@assets/logo-preview.png")
 
