@@ -20,11 +20,12 @@ jobs:
         FOLDER: build
         BUILD_SCRIPT: yarn && yarn build
 
-    - name: deploy file to server
-        uses: wlixcc/SFTP-Deploy-Action@v1.0 
+    - name: deploy file
+        uses: wlixcc/SFTP-Deploy-Action@v1.0
         with:
-          username: 'root'   #ssh user name
-          server: '${{ secrets.SERVER_IP }}' #引用之前创建好的secret
-          ssh_private_key: ${{ secrets.ACCESS_TOKEN }} #引用之前创建好的secret
-          local_path: './build/*'  # 对应我们项目build的文件夹路径
+          username: 'root'
+          server: '49.235.106.43'
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
+          local_path: './build/*'
           remote_path: '/usr/test'
+          args: '-o ConnectTimeout=5'
