@@ -1,0 +1,116 @@
+.parent{
+    min-height: 864px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.root {
+    position: relative;
+    width: 320px;
+  }
+  .banner {
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    // fontFamily PingFang-SC-Bold
+    font-weight: bold;
+    color: #000;
+    line-height:normal 30px;
+    margin-bottom: 20px;
+  }
+  .formItem {
+    margin-bottom: 20px;
+    & .ant-form-explain {
+      display: none;
+    }
+    & .has-error .ant-input-affix-wrapper .ant-inputfocus {
+      box-shadow: none !important;
+    }
+    // & .ant-input-affix-wrapperhover .ant-inputnot(.ant-input-disabled) {
+    //   border-color: #1989FA !important
+    // }
+  }
+  .input {
+    height: 40px;
+    & .ant-input {
+      border: 1px solid #dddddd;
+      &:hover,&:focus {
+        box-shadow: none;
+        border-color: #1989FA !important
+      }
+      &-webkit-input-placeholder {
+        color: #dddddd
+      }
+    }
+  }
+  .checkWrapper {
+    margin-bottom: 20px;
+    & .ant-form-item-control {
+      line-height: 1
+    }
+    & .ant-checkbox-inner {
+      border: 1px solid #ddd !important;
+      background: #fff !important
+    }
+    & .ant-checkbox-wrapperhover .ant-checkbox-inner .ant-checkboxhover {
+      border-color: #ddd
+    }
+    & .ant-checkbox-inner .ant-checkbox-inputfocus + .ant-checkbox-inner {
+      border-color: #1989FA
+    }
+    & .ant-checkbox-checked .ant-checkbox-inner {
+      background-color: #1989FA !important;
+      border-color: #1989FA !important
+    }
+    & .ant-checkbox-checkedafter {
+      borderColor: #1989FA
+    }
+    & .ant-checkbox-checked .ant-checkbox-innerafter {
+      border-color: #FFFFFF !important
+    }
+    & .ant-checkbox-checked +span {
+      color: #1989FA
+    }
+  }
+  .checkbox {
+    color: #AAAAAA
+  }
+  .button {
+    width: 100%;
+    height: 38px !important;
+    font-size: 14px !important;
+    background-color: #424363;
+    border-color :#424363;
+    &hover, &focus {
+      background-color: #424363;
+      border-color: #424363
+    }
+  }
+  .title {
+    font-Size: 14px;
+    font-family :PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(2552552550.65);
+    line-height: 14px;
+    letter-spacing: 2px;
+    margin-top: 12px;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  .subTitle {
+    font-size :16px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(2552552551);
+    line-height: 16px;
+    margin-bottom :24px;
+    text-align: center;
+  }
+  .error {
+    color: #FF0000
+  }
+  .errorBorder {
+    & .ant-input {
+      border-color:  #FF0000 !important
+    }
+  }
