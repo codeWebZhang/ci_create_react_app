@@ -21,13 +21,10 @@ jobs:
         BUILD_SCRIPT: yarn && yarn build
 
     - name: Deploy to Server
-        uses: easingthemes/ssh-deploy@v2.0.8
-        env:
-          # 这个地方的用法会在下面解释，简单的说就是一个变量
-          # 为了安全，被写在一个其他的地方
-          SSH_PRIVATE_KEY: ${{ secrets.TOKEN }}
-          REMOTE_HOST: '49.235.106.43'
-          REMOTE_USER: 'root'
-          SOURCE: './build'
-          TARGET: '/usr/test'
-          ARGS: '-avzr --delete'
+        uses: wlixcc/SFTP-Deploy-Action@v1.0 
+        with:
+          username: 'root'   #ssh user name
+          server: '${{ secrets.SERVER_IP }}' #引用之前创建好的secret
+          ssh_private_key: ${{ secrets.ACCESS_TOKEN }} #引用之前创建好的secret
+          local_path: './build/*'  # 对应我们项目build的文件夹路径
+          remote_path: '/usr/test'
