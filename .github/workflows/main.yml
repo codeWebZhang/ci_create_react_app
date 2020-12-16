@@ -20,12 +20,12 @@ jobs:
         FOLDER: build
         BUILD_SCRIPT: yarn && yarn build
 
-    - name: deploy file
-        uses: AEnterprise/rsync-deploy@v1.0
+    - name: Deploy
+        uses: easingthemes/ssh-deploy@v2.0.7
         with:
-          username: root
-          server: 49.235.106.43
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
-          local_path: ./build/*
-          remote_path: /usr/test
-          args: -o ConnectTimeout=5
+          SSH_PRIVATE_KEY: ${{ secrets.ACCESS_TOKEN }}
+          ARGS: "-avz --delete"
+          SOURCE: "./build/*"
+          REMOTE_HOST: "49.235.106.43"
+          REMOTE_USER: "root"
+          TARGET: "./build/*"
