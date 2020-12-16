@@ -23,9 +23,9 @@ jobs:
     - name: deploy file
         uses: SamKirkland/FTP-Deploy-Action@3.1.1
         with:
-          username: 'root'
-          server: '49.235.106.43'
+          username: root
+          server: 49.235.106.43
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
-          local_path: './build/*'
-          remote_path: '/usr/test'
-          args: '-o ConnectTimeout=5'
+          local_path: ./build/*
+          remote_path: /usr/test
+          args: -o ConnectTimeout=5
