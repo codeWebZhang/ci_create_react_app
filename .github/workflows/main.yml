@@ -20,7 +20,7 @@ jobs:
         FOLDER: build
         BUILD_SCRIPT: yarn && yarn build
 
-    - name: Deploy to Server
+    - name: deploy file to server
         uses: wlixcc/SFTP-Deploy-Action@v1.0 
         with:
           username: 'root'   #ssh user name
