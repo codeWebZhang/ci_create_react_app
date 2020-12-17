@@ -34,12 +34,14 @@ jobs:
           hexo generate
         env:
           CI: true
+
+      # Deploy
       - name: Deploy
         uses: easingthemes/ssh-deploy@v2.0.7
-        with: hengkx/ssh-deploy@v1.0.1
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.ACCESS_TOKEN }}
           ARGS: "-avz --delete"
-          SOURCE: "build"
-          REMOTE_HOST: "49.235.106.43"
-          REMOTE_USER: "root"
-          TARGET: "usr/test"
+          SOURCE: "build/"
+          REMOTE_HOST: 49.235.106.43
+          REMOTE_USER: root
+          TARGET: usr/test
