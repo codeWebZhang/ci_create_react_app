@@ -44,4 +44,4 @@ jobs:
           SOURCE: "build/"
           REMOTE_HOST: 49.235.106.43
           REMOTE_USER: root
-          TARGET: test
+          TARGET: /test
