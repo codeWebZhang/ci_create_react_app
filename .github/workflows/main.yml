@@ -1,47 +1,27 @@
-# deploy.yml
-name: deploy blog to aliyun
+name: Deploy site files
+
 on:
   push:
     branches:
-      - master
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      # 切换分支
-      - name: Checkout
-        uses: actions/checkout@master
-      # 下载 git submodule
-      - uses: srt32/git-actions@v0.0.3
-        with:
-          args: git submodule update --init --recursive
-      # 使用 node:10
-      - name: use Node.js 10
-        uses: actions/setup-node@v1
-        with:
-          node-version: 10
-      # npm install
-      - name: npm install
-        run: |
-          npm install -g hexo-cli
-          npm install
-        env:
-          CI: true
-      # build
-      - name: hexo build
-        run: |
-          hexo clean
-          hexo generate
-        env:
-          CI: true
+      - master # 只在master上push触发部署
+    paths-ignore: # 下列文件的变更不触发部署，可以自行添加
+      - README.md
+      - LICENSE
 
-      # Deploy
-      - name: Deploy
-        uses: easingthemes/ssh-deploy@v2.0.7
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # 使用ubuntu系统镜像运行自动化脚本
+
+    steps: # 自动化步骤
+      - uses: actions/checkout@v2 # 第一步，下载代码仓库
+
+      - name: Deploy to Server # 第二步，rsync推文件
+        uses: AEnterprise/rsync-deploy@v1.0 # 使用别人包装好的步骤镜像
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.ACCESS_TOKEN }}
-          ARGS: "-avz --delete"
-          SOURCE: "build/"
-          REMOTE_HOST: 49.235.106.43
-          REMOTE_USER: root
-          TARGET: usr/test
+          DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }} # 引用配置，SSH私钥
+          ARGS: -avz --delete --exclude='*.pyc' # rsync参数，排除.pyc文件
+          SERVER_PORT: "22" # SSH端口
+          FOLDER: ./ # 要推送的文件夹，路径相对于代码仓库的根目录
+          SERVER_IP: ${{ secrets.SSH_HOST }} # 引用配置，服务器的host名（IP或者域名domain.com）
+          USERNAME: ${{ secrets.SSH_USERNAME }} # 引用配置，服务器登录名
+          SERVER_DESTINATION: /home/test/ # 部署到目标文件夹
