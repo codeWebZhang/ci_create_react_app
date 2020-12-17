@@ -39,7 +39,7 @@ jobs:
       - name: Deploy
         uses: easingthemes/ssh-deploy@v2.0.7
         env:
-          DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: -avz --delete --exclude='*.pyc' # rsync参数，排除.pyc文件
           SERVER_PORT: "22" # SSH端口
           FOLDER: "build/"
