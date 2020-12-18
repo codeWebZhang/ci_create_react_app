@@ -1,47 +1,26 @@
-# deploy.yml
-name: deploy blog to aliyun
-on:
-  push:
-    branches:
-      - master
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      # 切换分支
-      - name: Checkout
-        uses: actions/checkout@master
-      # 下载 git submodule
-      - uses: srt32/git-actions@v0.0.3
-        with:
-          args: git submodule update --init --recursive
-      # 使用 node:10
-      - name: use Node.js 10
-        uses: actions/setup-node@v1
-        with:
-          node-version: 10
-      # npm install
-      - name: npm install
-        run: |
-          npm install -g hexo-cli
-          npm install
-        env:
-          CI: true
-      # build
-      - name: hexo build
-        run: |
-          hexo clean
-          hexo generate
-        env:
-          CI: true
+name: Continuous Deploy #action名称
+on: [push] #在推送的时候运行此action
 
-      # Deploy
-      - name: Deploy
-        uses: easingthemes/ssh-deploy@v2.0.7
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-rltgoDzvO --delete"
-          SOURCE: "build"
-          REMOTE_HOST: 49.235.106.43
-          REMOTE_USER: root
-          TARGET: /usr/test
+jobs:
+  deploy_job:
+    runs-on: ubuntu-latest  #运行环境
+    name: build
+    steps:
+      # check out the repository
+      - name: Checkout    
+        uses: actions/checkout@v2    #这里使用了github官方提供的action,checkout项目到虚拟机上
+
+      - name: Install Dependencies
+        run: yarn
+      - name: Build
+        run: yarn build
+
+      # 利用action把build好的文件上传到服务器/var/www/react-app路径下,需要确认此目录已在服务端创建
+      - name: deploy file to server
+        uses: wlixcc/SFTP-Deploy-Action@v1.0 
+        with:  
+          username: 'root'   #ssh user name
+          server: '${{ secrets.SSH_HOST }}' #引用之前创建好的secret
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} #引用之前创建好的secret
+          local_path: './build/*'  # 对应我们项目build的文件夹路径
+          remote_path: '/usr/test'
