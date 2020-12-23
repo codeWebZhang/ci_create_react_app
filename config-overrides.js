@@ -11,7 +11,8 @@ const devServerCustom = () => config => {
     config.quiet = false;
     config.proxy = {
         "/api": {
-            target: "http://49.235.106.43:9091",
+            // target: "http://49.235.106.43:9091",
+            target: "http://49.233.52.91:8080",
             // target: "http://127.0.0.1:9999",
             changeOrigin: true,
             // pathRewrite: { '^/api': '/' },
@@ -23,8 +24,12 @@ const devServerCustom = () => config => {
         //     }
         // },
     };
+     const paths = require('react-scripts/config/paths');
+    paths.appBuild = path.join(path.dirname(paths.appBuild), 'dist');
+    config.output.path = path.join(path.dirname(config.output.path), 'dist');
     return config;
 };
+
 
 module.exports = {
     webpack: override(
