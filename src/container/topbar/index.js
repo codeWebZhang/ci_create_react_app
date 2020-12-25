@@ -3,12 +3,14 @@ import { Layout, Modal } from "antd";
 import axios from 'axios';
 import HorizontalNav from './horizontalNav';
 import styles from './index.module.less';
+import { useHistory } from 'react-router-dom';
 
 const { Header } = Layout;
 
 export default function TopBar(props) {
     // const styles = useStyles(props);
     // let { formatMessage } = props.intl;
+    const history = useHistory();
     let logOut = () => {
         Modal.info({
             title: '退出',
@@ -79,11 +81,13 @@ export default function TopBar(props) {
                     <li className={styles.user}>
                         <span
                             onClick={() => {
-                                // appHistory.push("/user/profile");
+                                history.push('/profile');
                             }}
                             // className="iconfont icon-user"
                             style={{ fontSize: "14px" }}
-                        />
+                        >
+                            个人信息
+                        </span>
                     </li>
                     <li className={styles.btn_close} onClick={logOut}>
                         {/* <img
